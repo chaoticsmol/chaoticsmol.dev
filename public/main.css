@@ -30,9 +30,10 @@ body {
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 15px;
   height: calc(100vh - 40px);
+  min-height: 600px; /* Ensure minimum height even on small screens */
 }
 
 .grid-item {
@@ -45,6 +46,82 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Make item-2 span two rows */
+.item-2 {
+  grid-row: span 2;
+  background-color: var(--light-blue);
+  padding: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.item-2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--gold) 0%, transparent 25%, var(--purple) 50%, transparent 75%, var(--burgundy) 100%);
+  opacity: 0.2;
+  z-index: 1;
+}
+
+/* Add duotone effect overlay */
+.item-2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, var(--burgundy) 0%, transparent 70%);
+  opacity: 0.4;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: color;
+  transition: opacity 0.5s ease;
+}
+
+.item-2:hover::after {
+  opacity: 0.2;
+}
+.social-links {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  z-index: 2;
+}
+
+.social-icon {
+  color: var(--navy);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.social-icon:hover {
+  opacity: 1;
+}
+
+.profile-image {
+  width: 92%;
+  height: 92%;
+  object-fit: contain;
+  object-position: center;
+  max-height: 100%;
+  padding: 0;
+  z-index: 2;
+  filter: brightness(1.05) drop-shadow(0 0 8px rgba(31, 58, 88, 0.4));
+  transition: all 0.5s ease;
 }
 
 .grid-item h2 {
@@ -61,39 +138,98 @@ body {
 
 /* Individual grid items with artwork-inspired designs */
 .item-1 {
-  background-color: var(--gold);
+  background-color: var(--cream);
   color: var(--navy);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Triangle decorative element */
+.item-1 .triangle {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background-color: var(--terra-cotta);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+/* Small circle element */
+.item-1 .circle {
+  position: absolute;
+  top: 60px;
+  right: 30px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--burgundy);
+  z-index: -1;
+}
+
+/* Line element */
+.item-1 .line {
+  position: absolute;
+  top: 45%;
+  left: -10px;
+  width: 40px;
+  height: 1px;
+  background-color: var(--blue);
+  transform: rotate(45deg);
+  z-index: -1;
 }
 
 .item-1::before {
   content: "";
   position: absolute;
-  width: 150px;
-  height: 150px;
-  background-color: var(--burgundy);
-  top: -50px;
-  right: -50px;
-  border-radius: 50%;
-  opacity: 0.8;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(45deg, var(--gold) 25%, transparent 25%),
+    linear-gradient(135deg, var(--burgundy) 25%, transparent 25%),
+    linear-gradient(225deg, var(--blue) 25%, transparent 25%),
+    linear-gradient(315deg, var(--purple) 25%, transparent 25%);
+  background-size: 50% 50%;
+  opacity: 0.2;
+  z-index: -1;
 }
 
-.item-2 {
-  background-color: var(--light-blue);
-  color: var(--burgundy);
-}
-
-.item-2::after {
+.item-1::after {
   content: "";
   position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 100px solid transparent;
-  border-right: 100px solid transparent;
-  border-bottom: 150px solid var(--purple);
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.3;
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--terra-cotta);
+  border-radius: 50%;
+  top: -40px;
+  right: -40px;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.item-1 h2 {
+  position: relative;
+  display: inline-block;
+}
+
+.item-1 h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--burgundy), var(--gold), var(--blue));
+}
+
+.item-1 p {
+  position: relative;
+  max-width: 90%;
 }
 
 .item-3 {
@@ -114,43 +250,14 @@ body {
 }
 
 .item-4 {
-  background-color: var(--terra-cotta);
-  color: var(--navy);
-}
-
-.item-4::after {
-  content: "";
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  top: 20px;
-  right: 20px;
-  background: linear-gradient(45deg, var(--gold) 50%, transparent 50%);
-  opacity: 0.6;
-}
-
-.item-5 {
   background-color: var(--navy);
   color: var(--cream);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.item-5::before {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 1px;
-  background-color: var(--pink);
-  top: 50%;
-  left: 0;
-  box-shadow: 0 0 10px 2px var(--pink);
-}
-
-.item-6 {
-  background-color: var(--pink);
-  color: var(--navy);
-}
-
-.item-6::after {
+.item-4::before {
   content: "";
   position: absolute;
   top: 0;
@@ -158,7 +265,180 @@ body {
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 70% 30%, var(--gold) 0%, var(--gold) 5%, transparent 6%),
-    radial-gradient(circle at 30% 60%, var(--burgundy) 0%, var(--burgundy) 5%, transparent 6%);
-  opacity: 0.5;
+    radial-gradient(circle at 20% 30%, var(--burgundy) 0%, var(--burgundy) 10%, transparent 11%),
+    radial-gradient(circle at 80% 60%, var(--blue) 0%, var(--blue) 5%, transparent 6%),
+    radial-gradient(circle at 50% 50%, var(--terra-cotta) 0%, var(--terra-cotta) 3%, transparent 4%);
+  opacity: 0.4;
+  z-index: -1;
+}
+
+.item-4::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--gold);
+  border-radius: 0;
+  transform: rotate(45deg);
+  top: -50px;
+  left: -50px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Half-moon shape */
+.item-4 .half-moon {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+/* Diagonal line */
+.item-4 .diagonal-line {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  width: 80px;
+  height: 2px;
+  background-color: var(--purple);
+  transform: rotate(135deg);
+  z-index: -1;
+}
+
+.item-4 h2 {
+  position: relative;
+  display: inline-block;
+}
+
+.item-4 h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--terra-cotta));
+}
+
+.item-4 a {
+  color: var(--cream);
+  text-decoration: underline;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.item-4 a:hover {
+  color: var(--terra-cotta);
+}
+
+.item-4 a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--burgundy);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.item-4 a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Removing item-5 styles since we're removing the bottom row */
+
+/* Responsive design for mobile devices */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 15px; /* Slightly less padding on body for small screens */
+  }
+  
+  .grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: auto; /* Allow container to expand based on content */
+    min-height: unset; /* Remove minimum height on mobile */
+    margin-bottom: 20px; /* Add margin at the bottom of the container */
+  }
+
+  /* Reset item-2 span for mobile */
+  .item-2 {
+    grid-row: initial;
+    height: 300px; /* Fixed height for profile image container on mobile */
+  }
+
+  /* Ensure all grid items can expand as needed */
+  .grid-item {
+    width: 100%;
+    padding: 20px 15px; /* Slightly more top/bottom padding */
+    height: auto; /* Allow height to be determined by content */
+    min-height: unset; /* Reset any min-height that might be set elsewhere */
+  }
+
+  /* Set specific order and styles for elements */
+  .item-1 {
+    order: 1;
+    min-height: 220px; /* Ensure minimum height to fit content */
+    padding-bottom: 70px; /* Add extra padding at the bottom for social links */
+    position: relative;
+  }
+
+  .social-links {
+    bottom: 15px; /* Position a bit higher on mobile */
+  }
+
+  .item-2 {
+    order: 2;
+  }
+
+  .item-4 {
+    order: 3;
+    min-height: unset; /* Remove fixed min-height */
+    padding: 25px 20px 40px; /* More generous padding all around */
+    height: auto; /* Allow full expansion */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Add extra margin at the bottom */
+  }
+  
+  /* Ensure all content is visible and well-spaced */
+  .grid-item p {
+    max-width: 100%;
+    margin-bottom: 15px; /* More space below all paragraphs */
+    line-height: 1.5; /* Slightly increased line height for readability */
+  }
+  
+  /* Prevent overflow of text */
+  .grid-item {
+    overflow-y: visible; /* Ensure content can overflow if needed */
+    overflow-wrap: break-word; /* Break long words if needed */
+    word-wrap: break-word; /* Legacy support */
+  }
+
+  /* Ensure all decorative elements don't interfere with content */
+  .item-4 .half-moon,
+  .item-4 .diagonal-line {
+    opacity: 0.3; /* Reduce opacity to improve readability */
+    pointer-events: none; /* Ensure they don't interfere with interaction */
+  }
+  
+  /* Adjust profile image for mobile */
+  .profile-image {
+    max-height: 280px;
+    width: auto;
+    object-fit: contain;
+  }
 } 
