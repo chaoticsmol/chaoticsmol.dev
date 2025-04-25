@@ -36,7 +36,7 @@ nvm alias default $NODE_VERSION
 
 # Get the actual installed Node.js version and path
 NODE_ACTUAL_VERSION=$(node -v)
-NODE_PATH="$NVM_DIR/versions/node/${NODE_ACTUAL_VERSION#v}/bin"
+NODE_PATH="$NVM_DIR/versions/node/${NODE_ACTUAL_VERSION}/bin"
 
 # Install npm dependencies
 echo "Installing npm dependencies..."
